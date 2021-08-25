@@ -35,13 +35,13 @@ const toSeconds = ms => Math.floor(ms / 1000)
 const getStatus = ({ hasValue, isHit, isStale, forceExpiration }) =>
   isHit
     ? isStale
-        ? 'STALE'
-        : 'HIT'
+      ? 'STALE'
+      : 'HIT'
     : forceExpiration
-      ? 'BYPASS'
-      : hasValue
-        ? 'EXPIRED'
-        : 'MISS'
+    ? 'BYPASS'
+    : hasValue
+    ? 'EXPIRED'
+    : 'MISS'
 
 const setHeaders = ({
   createdAt,
@@ -60,7 +60,7 @@ const setHeaders = ({
   const maxAge = toSeconds(diff)
   const revalidation = staleTtl ? toSeconds(staleTtl) : 0
 
-  let cacheControl = `public, must-revalidate, max-age=${maxAge}`
+  let cacheControl = `public, max-age=${maxAge}`
 
   if (revalidation) {
     cacheControl = `${cacheControl}, stale-while-revalidate=${revalidation}, stale-if-error=${revalidation}`
